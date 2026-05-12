@@ -1,0 +1,43 @@
+[
+    {
+        "id": "85875c1416021982",
+        "type": "ui_text",
+        "z": "519b964f23fd1620",
+        "group": "ee5f6cf066739abe",
+        "order": 3,
+        "width": "12",
+        "height": "1",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 880,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ee5f6cf066739abe",
+        "type": "ui_group",
+        "name": "Sinais Vitais e Ambiente (Leito)",
+        "tab": "21f91b9e8b06a018",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "21f91b9e8b06a018",
+        "type": "ui_tab",
+        "name": "Monitoramento KuraVet",
+        "icon": "pets",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
