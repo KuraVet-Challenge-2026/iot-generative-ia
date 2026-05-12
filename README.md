@@ -29,3 +29,11 @@ Assista à nossa demonstração técnica e explicação do projeto:
 - `/src/main.cpp`: Código-fonte em C++ com a lógica de sensores, atuadores e comunicação MQTT.
 - `diagram.json`: Estrutura do circuito simulado no Wokwi.
 - `platformio.ini`: Arquivo de dependências para rodar o projeto localmente no VS Code.
+
+## 📊 Dashboard (Node-RED)
+O arquivo `dashboard-kuravet.json` contém o fluxo completo do nosso painel de controle. 
+Para visualizar:
+1. Tenha o Node-RED rodando na sua máquina (ex: via Docker).
+2. Acesse `http://localhost:1880`.
+3. Vá em Menu > Import e carregue o arquivo `dashboard-kuravet.json`.
+4. Clique em Deploy e acesse a interface gráfica em `http://localhost:1880/ui`.
