@@ -13,7 +13,7 @@
 ## 🔗 Links Oficiais
 
 * **Vídeo Pitch da Solução:** [LINK_DO_VIDEO_AQUI]
-* **Repositório GitHub:** [LINK_DO_REPOSITORIO]
+* **Repositório GitHub:** https://github.com/KuraVet-Challenge-2026/iot-generative-ia.git
 
 ## 1. Definição do Problema e Proposta de Valor
 
@@ -86,7 +86,7 @@ Para implantar o ambiente e visualizar o fluxo de integração dos serviços:
 1. Clone o repositório localmente utilizando:
 
    ```bash
-   git clone [LINK_DO_REPOSITORIO]
+   git clone (https://github.com/KuraVet-Challenge-2026/iot-generative-ia.git)
    ```
 
 2. Certifique-se de possuir **Docker** e a **Azure CLI** configurados em seu ambiente.
