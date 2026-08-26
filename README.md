@@ -1,5 +1,3 @@
-<img width="8192" height="2340" alt="Untitled diagram-2026-08-26-224028" src="https://github.com/user-attachments/assets/e5fb73e6-0e25-4118-a86a-0ce2fe2e3ac5" /># 🐾 KuraVet - Documentação Arquitetural de IA (Sprint 3)
-
 ## 👥 Integrantes
 
 * **Pedro Henrique Luiz Alves Duarte** — RM563405
