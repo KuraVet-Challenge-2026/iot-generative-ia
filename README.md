@@ -1,39 +1,139 @@
-# KuraVet - Smart Kennel (Leito Inteligente) 🐾
+# 🐾 KuraVet - Documentação Arquitetural de IA (Sprint 3)
 
-Este repositório contém a entrega do 1º Sprint da disciplina Disruptive Architectures: IOT, IOB & Generative IA para o ecossistema KuraVet.
+## 👥 Integrantes
 
-## 🎯 O Problema
-Em clínicas veterinárias, pets internados ou em recuperação pós-cirúrgica necessitam de repouso e de um ambiente com temperatura controlada. A falta de monitoramento contínuo pode levar a estresse térmico ou complicações devido à agitação excessiva do animal. 
+* **Pedro Henrique Luiz Alves Duarte** — RM563405
+* **Henrique Martins Oliveira** — RM563620
+* **Guilherme Macedo Martins** — RM562396
 
-A solução **Smart Kennel** utiliza IoT para monitorar o ambiente (temperatura/umidade) e o repouso do pet (distância/agitação), alertando os veterinários em tempo real em caso de anomalias, garantindo a integridade do índice de vitalidade do ecossistema KuraVet.
+                  
 
-## 🛠️ Tecnologias Utilizadas e Justificativa
-* **ESP32:** Microcontrolador com Wi-Fi nativo, ideal para aplicações IoT de baixo custo e alta eficiência.
-* **Sensor DHT22:** Monitoramento preciso de temperatura e umidade para garantir a climatização do leito.
-* **Sensor Ultrassônico (HC-SR04):** Posicionado estrategicamente para medir a distância do pet. Variações constantes indicam agitação, enquanto medidas estáticas indicam repouso.
-* **Protocolo MQTT (HiveMQ):** Protocolo leve e assíncrono, perfeito para enviar telemetria em tempo real das clínicas para o nosso backend na nuvem.
-* **Wokwi:** Plataforma de simulação que nos permitiu validar a prova de conceito de hardware antes da montagem física.
+**Disciplina:** DISRUPTIVE ARCHITECTURES: IOT, IOB & GENERATIVE IA (FIAP)
 
-## 🚀 Como testar a simulação
-1. Acesse o nosso projeto no Wokwi através deste link: `[https://wokwi.com/projects/463770290208231425]`
-2. Clique no botão **Play** (verde) para iniciar a simulação.
-3. Aguarde o terminal exibir `WiFi Conectado!` e `Conectado ao Broker MQTT...`.
-4. **Interação:** Clique no sensor DHT22 e altere a temperatura para mais de 29°C, ou clique no sensor HC-SR04 e altere a distância para menos de 10cm. 
-5. O alarme (Buzzer + LED Vermelho) será acionado e o log enviará o status de alerta via MQTT.
+## 🔗 Links Oficiais
 
-## 📹 Vídeo de Apresentação (Pitch)
-Assista à nossa demonstração técnica e explicação do projeto:
-`[COLE O LINK DO VÍDEO DO YOUTUBE AQUI]`
+* **Vídeo Pitch da Solução:** [LINK_DO_VIDEO_AQUI]
+* **Repositório GitHub:** [LINK_DO_REPOSITORIO]
 
-## 📁 Estrutura do Projeto
-- `/src/main.cpp`: Código-fonte em C++ com a lógica de sensores, atuadores e comunicação MQTT.
-- `diagram.json`: Estrutura do circuito simulado no Wokwi.
-- `platformio.ini`: Arquivo de dependências para rodar o projeto localmente no VS Code.
+## 1. Definição do Problema e Proposta de Valor
 
-## 📊 Dashboard (Node-RED)
-O arquivo `dashboard-kuravet.json` contém o fluxo completo do nosso painel de controle. 
-Para visualizar:
-1. Tenha o Node-RED rodando na sua máquina (ex: via Docker).
-2. Acesse `http://localhost:1880`.
-3. Vá em Menu > Import e carregue o arquivo `dashboard-kuravet.json`.
-4. Clique em Deploy e acesse a interface gráfica em `http://localhost:1880/ui`.
+O mercado veterinário brasileiro atua predominantemente de forma episódica, onde o tutor aciona a clínica apenas em emergências ou para vacinas obrigatórias. Isso resulta em uma jornada de saúde fragmentada, baixa recorrência, enfraquecimento do vínculo entre clínica e tutor, e um baixo *Lifetime Value* (LTV) por animal. O componente de IA do KuraVet transforma dados isolados em uma jornada de cuidado contínuo e preventivo.
+
+A inteligência artificial agrega valor aos seguintes atores:
+
+* **Para o Tutor:** Elimina a carga mental do cuidado diário. A IA cruza dados de espécie, raça, idade e histórico para enviar recomendações ativas sobre nutrição, protocolos preventivos e continuidade medicamentosa.
+* **Para a Clínica:** Aumenta o LTV e otimiza o tempo da equipe. A IA atua na priorização de atendimento, classificando a urgência de sintomas relatados e organizando a fila de teleconsulta de forma proativa para que a clínica atue antes do agravamento.
+* **Para o Pet:** Garante bem-estar contínuo através do monitoramento preditivo adequado para cada fase biológica de sua vida.
+
+## 2. Justificativa Tecnológica
+
+Para suportar o ecossistema KuraVet, escolhemos uma **abordagem híbrida** que combina um **Motor de Regras Inteligentes** com uma **LLM (Large Language Model) para NLP (Processamento de Linguagem Natural)**.
+
+* **Prevenção de Alucinações (Motor de Regras):** No setor de saúde, a precisão clínica é inegociável e não tolera alucinações de modelos generativos puros. O motor de regras garante que o mapeamento clínico seja determinístico e seguro. Se o banco relacional indica um cão de 10 anos cardiopata, o sistema aciona protocolos terapêuticos rigidamente validados.
+* **Interface e Triagem (LLM/NLP):** A LLM atua estritamente na camada de comunicação. Ela recebe o relato informal de sintomas via chat no aplicativo, interpreta a intenção através de NLP e traduz essas informações em parâmetros estruturados. Isso permite ao sistema classificar a urgência sem depender que o tutor preencha formulários complexos.
+
+## 3. Mapeamento de Dados (IoB/IoT)
+
+A precisão da arquitetura depende de um fluxo constante de dados estruturados e comportamentais.
+
+| **Dado**                                       | **Origem**                                                                  | **Estrutura**                           | **Utilização pela IA**                                                                                                   |
+| ---------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Perfil do Pet** (Espécie, raça, idade, peso) | Inserção do tutor no cadastro inicial via App Mobile                        | Dados estruturados (JSON/Tabelas)       | Definição de limites biológicos primários para o Motor de Regras disparar protocolos de vacinação e vermifugação.        |
+| **Histórico Clínico e Vacinal**                | Inserção do veterinário via Painel Web e retido no Banco Oracle             | Dados estruturados (Relacional)         | Fornece o contexto de saúde exato, como doenças crônicas ou cirurgias prévias, para garantir precisão nas recomendações. |
+| **Comportamento e Relatos (IoB)**              | Relatos de sintomas contínuos e hábitos diários inseridos pelo tutor no App | Dados não-estruturados (Texto via Chat) | A LLM processa a linguagem natural para extrair urgência clínica e retroalimentar a adesão terapêutica contínua.         |
+
+## 4. Arquitetura e Fluxo de Dados
+
+O ecossistema foi desenhado para garantir o trânsito seguro de informações entre as interfaces de usuário e a infraestrutura na nuvem.
+
+1. O tutor insere um relato de sintoma na vitrine da aplicação (Mobile React Native).
+2. A requisição é direcionada ao backend principal, nossa API estruturada em Java (Spring Boot).
+3. A API consulta a fonte da verdade no banco Oracle para resgatar o histórico do paciente.
+4. A API constrói um pacote contextualizado (Relato + Histórico) e o envia ao componente híbrido de IA.
+5. O modelo de NLP processa o sintoma e o Motor de Regras avalia o risco, devolvendo a classificação de urgência e a diretriz clínica.
+6. A API registra a trilha no banco de dados e simultaneamente notifica o tutor no aplicativo e atualiza a fila de triagem no painel administrativo web.
+
+### Diagrama de Sequência
+
+```mermaid
+sequenceDiagram
+    autonumber
+
+    actor Tutor
+    participant App as Frontend Mobile (React Native)
+    participant API as Backend (Spring Boot API)
+    participant DB as Fonte da Verdade (Oracle DB)
+    participant IA as IA (LLM + Motor Regras)
+    participant Web as Painel Administrativo (Web)
+    actor Vet as Veterinário (Clínica)
+
+    Tutor->>App: Envia relato de saúde no chat do App
+    App->>API: POST /triagem/relato
+    API->>DB: Consulta Histórico Clínico e Perfil
+    DB-->>API: Retorna dados estruturados do paciente
+    API->>IA: Envia payload integrado (Relato + Dados Seguros)
+    IA-->>API: Retorna grau de urgência e mapeamento de ação
+    API->>DB: Salva trilha de auditoria e recomendação
+    API-->>Web: Atualiza fila de teleconsulta com prioridade
+    API-->>App: Retorna recomendação imediata ao tutor
+    Web-->>Vet: Exibe alerta de triagem para intervenção
+```
+
+## 5. Instruções de Uso
+
+Para implantar o ambiente e visualizar o fluxo de integração dos serviços:
+
+1. Clone o repositório localmente utilizando:
+
+   ```bash
+   git clone [LINK_DO_REPOSITORIO]
+   ```
+
+2. Certifique-se de possuir **Docker** e a **Azure CLI** configurados em seu ambiente.
+
+3. Na raiz do projeto, execute:
+
+   ```bash
+   docker-compose up --build -d
+   ```
+
+   Esse comando provisionará a API Spring Boot e o contêiner do banco de dados Oracle isolado de privilégios de *root*.
+
+4. O tráfego da API REST estará liberado em:
+
+   ```text
+   http://localhost:8080
+   ```
+
+   E as *views* do painel da clínica em:
+
+   ```text
+   http://localhost:8080/admin
+   ```
+
+5. Para rodar o projeto mobile, navegue até a pasta do client, execute:
+
+   ```bash
+   npm install
+   ```
+
+   Em seguida, inicie a aplicação do tutor através de:
+
+   ```bash
+   npx expo start
+   ```
+
+## 6. Tecnologias Utilizadas
+
+* **App Mobile (Vitrine):** React Native executado via Expo com integração de autenticação Firebase.
+* **Backend e Painel Web (Coração):** Java com Spring Boot servindo endpoints REST (JSON) e interfaces administrativas renderizadas via Thymeleaf.
+* **Banco de Dados (Fonte da Verdade):** Oracle DB com lógica robusta em PL/SQL (Procedures/Functions) e Triggers para auditoria rigorosa.
+* **Cloud & DevOps (A Esteira):** Implantação 100% conteinerizada com Docker, orquestrada na Azure (ACR e ACI).
+* **Qualidade e Observabilidade:** Microserviços paralelos em .NET focados em testes (xUnit com padrão AAA) e coleta de logs com Serilog.
+* **Inteligência Artificial:** Processamento hibridizado (Motor de Regras determinístico para segurança clínica + LLM para processamento semântico do tutor).
+
+## 7. Resultados Parciais
+
+Durante o ciclo de desenvolvimento focado na arquitetura, consolidamos os *pipelines* de CI/CD para os contêineres Docker alocados na Azure. A comunicação inicial entre a aplicação React Native, o monolito Spring Boot e as rotinas de banco de dados no Oracle DB já está estabelecida de forma estável.
+
+Os microsserviços satélites em .NET já integram verificações de integridade (*health checks*), garantindo fundações seguras para plugar a camada definitiva de inferência do modelo de Inteligência Artificial sem comprometer a confiabilidade do histórico médico.
