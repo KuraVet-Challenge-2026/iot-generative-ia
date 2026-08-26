@@ -1,4 +1,4 @@
-# 🐾 KuraVet - Documentação Arquitetural de IA (Sprint 3)
+<img width="8192" height="2340" alt="Untitled diagram-2026-08-26-224028" src="https://github.com/user-attachments/assets/e5fb73e6-0e25-4118-a86a-0ce2fe2e3ac5" /># 🐾 KuraVet - Documentação Arquitetural de IA (Sprint 3)
 
 ## 👥 Integrantes
 
@@ -55,29 +55,8 @@ O ecossistema foi desenhado para garantir o trânsito seguro de informações en
 
 ### Diagrama de Sequência
 
-```mermaid
-sequenceDiagram
-    autonumber
+<a href="https://ibb.co/hF40crD2"><img src="https://i.ibb.co/d4VZtXGk/Untitled-diagram-2026-08-26-224028.png" alt="Untitled-diagram-2026-08-26-224028" border="0"></a>
 
-    actor Tutor
-    participant App as Frontend Mobile (React Native)
-    participant API as Backend (Spring Boot API)
-    participant DB as Fonte da Verdade (Oracle DB)
-    participant IA as IA (LLM + Motor Regras)
-    participant Web as Painel Administrativo (Web)
-    actor Vet as Veterinário (Clínica)
-
-    Tutor->>App: Envia relato de saúde no chat do App
-    App->>API: POST /triagem/relato
-    API->>DB: Consulta Histórico Clínico e Perfil
-    DB-->>API: Retorna dados estruturados do paciente
-    API->>IA: Envia payload integrado (Relato + Dados Seguros)
-    IA-->>API: Retorna grau de urgência e mapeamento de ação
-    API->>DB: Salva trilha de auditoria e recomendação
-    API-->>Web: Atualiza fila de teleconsulta com prioridade
-    API-->>App: Retorna recomendação imediata ao tutor
-    Web-->>Vet: Exibe alerta de triagem para intervenção
-```
 
 ## 5. Instruções de Uso
 
