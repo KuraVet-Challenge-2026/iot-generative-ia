@@ -10,7 +10,7 @@
 
 ## 🔗 Links Oficiais
 
-* **Vídeo Pitch da Solução:** [LINK_DO_VIDEO_AQUI]
+* **Vídeo Pitch da Solução:** https://youtu.be/94Ev2tcrBWs
 * **Repositório GitHub:** https://github.com/KuraVet-Challenge-2026/iot-generative-ia.git
 
 ## 1. Definição do Problema e Proposta de Valor
