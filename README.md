@@ -4,113 +4,95 @@
 * **Henrique Martins Oliveira** — RM563620
 * **Guilherme Macedo Martins** — RM562396
 
-                  
-
-**Disciplina:** DISRUPTIVE ARCHITECTURES: IOT, IOB & GENERATIVE IA (FIAP)
+**Disciplina:** DISRUPTIVE ARCHITECTURES: IOT, IOB & GENERATIVE IA (FIAP) — Turma 2TDSPO
 
 ## 🔗 Links Oficiais
 
 * **Vídeo Pitch da Solução:** https://youtu.be/94Ev2tcrBWs
-* **Repositório GitHub:** https://github.com/KuraVet-Challenge-2026/iot-generative-ia.git
+* **Repositório GitHub:** https://github.com/KuraVet-Challenge-2026/iot-generative-ia
+
+---
 
 ## 1. Definição do Problema e Proposta de Valor
 
-O mercado veterinário brasileiro atua predominantemente de forma episódica, onde o tutor aciona a clínica apenas em emergências ou para vacinas obrigatórias. Isso resulta em uma jornada de saúde fragmentada, baixa recorrência, enfraquecimento do vínculo entre clínica e tutor, e um baixo *Lifetime Value* (LTV) por animal. O componente de IA do KuraVet transforma dados isolados em uma jornada de cuidado contínuo e preventivo.
+O mercado veterinário brasileiro atua predominantemente de forma episódica: o tutor aciona a clínica apenas em emergências ou para vacinas obrigatórias. Isso resulta em uma jornada de saúde fragmentada, baixa recorrência, enfraquecimento do vínculo entre clínica e tutor, e um baixo *Lifetime Value* (LTV) por animal. O componente de IA do KuraVet transforma dados isolados em uma jornada de cuidado contínuo e preventivo.
 
 A inteligência artificial agrega valor aos seguintes atores:
 
-* **Para o Tutor:** Elimina a carga mental do cuidado diário. A IA cruza dados de espécie, raça, idade e histórico para enviar recomendações ativas sobre nutrição, protocolos preventivos e continuidade medicamentosa.
-* **Para a Clínica:** Aumenta o LTV e otimiza o tempo da equipe. A IA atua na priorização de atendimento, classificando a urgência de sintomas relatados e organizando a fila de teleconsulta de forma proativa para que a clínica atue antes do agravamento.
-* **Para o Pet:** Garante bem-estar contínuo através do monitoramento preditivo adequado para cada fase biológica de sua vida.
+* **Para o Tutor:** elimina a carga mental do cuidado diário. A IA cruza espécie, idade e histórico clínico para orientar sobre a urgência de sintomas relatados, sem exigir o preenchimento de formulários complexos.
+* **Para a Clínica:** otimiza o tempo da equipe. A IA classifica a urgência dos sintomas relatados e organiza a fila de triagem no portal, permitindo priorizar os casos mais graves.
+* **Para o Pet:** favorece a identificação precoce de situações de risco, respeitando as particularidades de cada fase biológica.
 
-## 2. Justificativa Tecnológica
+## 2. Abordagem de IA (Justificativa Tecnológica)
 
-Para suportar o ecossistema KuraVet, escolhemos uma **abordagem híbrida** que combina um **Motor de Regras Inteligentes** com uma **LLM (Large Language Model) para NLP (Processamento de Linguagem Natural)**.
+Adotamos uma **abordagem híbrida** que combina um **motor de regras determinístico** com uma **LLM** usada apenas para **Processamento de Linguagem Natural (NLP)**.
 
-* **Prevenção de Alucinações (Motor de Regras):** No setor de saúde, a precisão clínica é inegociável e não tolera alucinações de modelos generativos puros. O motor de regras garante que o mapeamento clínico seja determinístico e seguro. Se o banco relacional indica um cão de 10 anos cardiopata, o sistema aciona protocolos terapêuticos rigidamente validados.
-* **Interface e Triagem (LLM/NLP):** A LLM atua estritamente na camada de comunicação. Ela recebe o relato informal de sintomas via chat no aplicativo, interpreta a intenção através de NLP e traduz essas informações em parâmetros estruturados. Isso permite ao sistema classificar a urgência sem depender que o tutor preencha formulários complexos.
+* **Motor de regras determinístico (decisão clínica):** no setor de saúde, a decisão de urgência não pode depender de um modelo generativo sujeito a alucinações. O motor de regras cruza os sintomas extraídos com espécie, idade e histórico do pet (Oracle) e decide a urgência — `BAIXA | MODERADA | ALTA | EMERGENCIA` — e a recomendação, de forma auditável e reproduzível.
+* **LLM para NLP (interpretação do relato):** a LLM atua estritamente na camada de comunicação. Recebe o relato informal do tutor em linguagem natural e o converte em sintomas estruturados (JSON com schema fixo). **Ela não decide a urgência** — apenas estrutura o texto para o motor de regras.
+* **Fallback sem LLM:** quando a LLM não está disponível (ou o provedor ainda não está configurado), um **extrator por palavras-chave** garante que a triagem continue funcionando. O sistema é utilizável mesmo sem a camada generativa.
 
-## 3. Mapeamento de Dados (IoB/IoT)
+> **Por que isso importa:** a parte que toma a decisão clínica é 100% determinística e explicável. A IA generativa fica confinada à interpretação de texto, onde um erro é recuperável e nunca compromete a classificação de risco.
 
-A precisão da arquitetura depende de um fluxo constante de dados estruturados e comportamentais.
+## 3. Mapeamento de Dados (IoB)
 
-| **Dado**                                       | **Origem**                                                                  | **Estrutura**                           | **Utilização pela IA**                                                                                                   |
-| ---------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Perfil do Pet** (Espécie, raça, idade, peso) | Inserção do tutor no cadastro inicial via App Mobile                        | Dados estruturados (JSON/Tabelas)       | Definição de limites biológicos primários para o Motor de Regras disparar protocolos de vacinação e vermifugação.        |
-| **Histórico Clínico e Vacinal**                | Inserção do veterinário via Painel Web e retido no Banco Oracle             | Dados estruturados (Relacional)         | Fornece o contexto de saúde exato, como doenças crônicas ou cirurgias prévias, para garantir precisão nas recomendações. |
-| **Comportamento e Relatos (IoB)**              | Relatos de sintomas contínuos e hábitos diários inseridos pelo tutor no App | Dados não-estruturados (Texto via Chat) | A LLM processa a linguagem natural para extrair urgência clínica e retroalimentar a adesão terapêutica contínua.         |
+| **Dado** | **Origem** | **Estrutura** | **Utilização pela IA** |
+| --- | --- | --- | --- |
+| **Perfil do Pet** (espécie, raça, idade, peso) | Cadastro do tutor no App | Estruturado (relacional/JSON) | Define limites biológicos para o motor de regras avaliar o risco. |
+| **Histórico Clínico** | Inserido pelo veterinário no portal web, retido no Oracle | Estruturado (relacional) | Fornece contexto (doenças crônicas, cirurgias) para precisão na classificação. |
+| **Relatos de Sintomas (IoB)** | Texto livre inserido pelo tutor no App | Não-estruturado (texto) | A LLM (ou o fallback por palavras-chave) extrai os sintomas que alimentam o motor de regras. |
 
 ## 4. Arquitetura e Fluxo de Dados
 
-O ecossistema foi desenhado para garantir o trânsito seguro de informações entre as interfaces de usuário e a infraestrutura na nuvem.
-
-1. O tutor insere um relato de sintoma na vitrine da aplicação (Mobile React Native).
-2. A requisição é direcionada ao backend principal, nossa API estruturada em Java (Spring Boot).
-3. A API consulta a fonte da verdade no banco Oracle para resgatar o histórico do paciente.
-4. A API constrói um pacote contextualizado (Relato + Histórico) e o envia ao componente híbrido de IA.
-5. O modelo de NLP processa o sintoma e o Motor de Regras avalia o risco, devolvendo a classificação de urgência e a diretriz clínica.
-6. A API registra a trilha no banco de dados e simultaneamente notifica o tutor no aplicativo e atualiza a fila de triagem no painel administrativo web.
+1. O tutor insere um relato de sintoma no app (React Native / Expo).
+2. A requisição vai para o backend, uma API em **Java (Spring Boot)** — autenticação via **HTTP Basic**.
+3. A API consulta o **Oracle** para resgatar o histórico do pet.
+4. A API monta o contexto (relato + histórico) e aciona o componente de IA.
+5. O **extrator de sintomas** (LLM ou fallback por palavras-chave) estrutura o relato; o **motor de regras** avalia o risco e devolve a classificação de urgência e a diretriz clínica.
+6. A API grava a triagem no Oracle e, em paralelo, retorna o resultado ao app e atualiza a **fila de triagem no portal da clínica** (`/portal`). Casos `ALTA`/`EMERGENCIA` geram notificação no app.
 
 ### Diagrama de Sequência
 
-<a href="https://ibb.co/hF40crD2"><img src="https://i.ibb.co/d4VZtXGk/Untitled-diagram-2026-08-26-224028.png" alt="Untitled-diagram-2026-08-26-224028" border="0"></a>
+<a href="https://ibb.co/hF40crD2"><img src="https://i.ibb.co/d4VZtXGk/Untitled-diagram-2026-08-26-224028.png" alt="Diagrama de sequência da triagem KuraVet" border="0"></a>
 
+## 5. Onde está o código
 
-## 5. Instruções de Uso
+A lógica de IA é implementada **dentro do backend Java** (repositório `java-advanced`, pacote `br.com.fiap.kuravet.ia`), porque é onde estão os dados (Oracle) e o deploy. **Este repositório documenta e evidencia a IA:**
 
-Para implantar o ambiente e visualizar o fluxo de integração dos serviços:
+```
+README.md                      # este arquivo
+prompts/extracao_sintomas.md   # prompt de sistema + schema JSON de saída da extração
+regras/tabela_regras.md        # regras de urgência (sintoma × espécie × idade → urgência)
+avaliacao/cenarios.csv         # relatos de teste com a urgência esperada
+avaliacao/resultados.md        # esperado × obtido, taxa de acerto e casos de fallback
+```
 
-1. Clone o repositório localmente utilizando:
+> Os diretórios `prompts/`, `regras/` e `avaliacao/` são preenchidos conforme a triagem é implementada e validada no `java-advanced`.
 
-   ```bash
-   git clone (https://github.com/KuraVet-Challenge-2026/iot-generative-ia.git)
-   ```
+## 6. Como Testar
 
-2. Certifique-se de possuir **Docker** e a **Azure CLI** configurados em seu ambiente.
+A triagem é exposta pela API Java (endpoint de triagens) e consumida pela tela de triagem do app e pela fila do portal.
 
-3. Na raiz do projeto, execute:
+* **Pelo app / portal:** acessar a aplicação em `<URL_DO_WEB_APP>` *(preencher quando o deploy na Azure estiver no ar)*, enviar um relato de sintoma e observar a urgência e a recomendação retornadas.
+* **Pela API:** enviar o relato ao endpoint de triagem com autenticação **HTTP Basic**. O contrato de request/response está documentado no `java-advanced` e em `prompts/extracao_sintomas.md`.
+* **Cenários de validação:** os casos de teste e seus resultados (esperado × obtido) ficam em `avaliacao/`.
 
-   ```bash
-   docker-compose up --build -d
-   ```
+## 7. Tecnologias Utilizadas
 
-   Esse comando provisionará a API Spring Boot e o contêiner do banco de dados Oracle isolado de privilégios de *root*.
+* **App do Tutor:** React Native (Expo). Autenticação na API via HTTP Basic.
+* **Backend e Portal Web:** Java 21 + Spring Boot, endpoints REST (JSON) e portal do veterinário/tutor em Thymeleaf (`/portal`). Migrations versionadas com Flyway.
+* **Banco de Dados:** Oracle (instância da FIAP).
+* **Inteligência Artificial:** motor de regras determinístico (decisão de urgência) + LLM para NLP na extração de sintomas, com fallback por palavras-chave.
+* **Deploy:** Azure Web App, via pipeline no Azure DevOps. Segredos (incluindo `LLM_API_KEY`) injetados por *Variable Group* — nunca versionados no repositório.
 
-4. O tráfego da API REST estará liberado em:
+## 8. Resultados Parciais
 
-   ```text
-   http://localhost:8080
-   ```
+* Arquitetura da triagem híbrida definida e documentada (seção 2).
+* Motor de regras e extração de sintomas por palavras-chave em implementação no `java-advanced` (migration `V7 TRIAGEM`).
+* Integração com LLM condicionada à definição do provedor; até lá, o fallback por palavras-chave mantém a triagem funcional.
+* Avaliação por cenários (esperado × obtido) em `avaliacao/`.
 
-   E as *views* do painel da clínica em:
+## 9. Limitações
 
-   ```text
-   http://localhost:8080/admin
-   ```
-
-5. Para rodar o projeto mobile, navegue até a pasta do client, execute:
-
-   ```bash
-   npm install
-   ```
-
-   Em seguida, inicie a aplicação do tutor através de:
-
-   ```bash
-   npx expo start
-   ```
-
-## 6. Tecnologias Utilizadas
-
-* **App Mobile (Vitrine):** React Native executado via Expo com integração de autenticação Firebase.
-* **Backend e Painel Web (Coração):** Java com Spring Boot servindo endpoints REST (JSON) e interfaces administrativas renderizadas via Thymeleaf.
-* **Banco de Dados (Fonte da Verdade):** Oracle DB com lógica robusta em PL/SQL (Procedures/Functions) e Triggers para auditoria rigorosa.
-* **Cloud & DevOps (A Esteira):** Implantação 100% conteinerizada com Docker, orquestrada na Azure (ACR e ACI).
-* **Qualidade e Observabilidade:** Microserviços paralelos em .NET focados em testes (xUnit com padrão AAA) e coleta de logs com Serilog.
-* **Inteligência Artificial:** Processamento hibridizado (Motor de Regras determinístico para segurança clínica + LLM para processamento semântico do tutor).
-
-## 7. Resultados Parciais
-
-Durante o ciclo de desenvolvimento focado na arquitetura, consolidamos os *pipelines* de CI/CD para os contêineres Docker alocados na Azure. A comunicação inicial entre a aplicação React Native, o monolito Spring Boot e as rotinas de banco de dados no Oracle DB já está estabelecida de forma estável.
-
-Os microsserviços satélites em .NET já integram verificações de integridade (*health checks*), garantindo fundações seguras para plugar a camada definitiva de inferência do modelo de Inteligência Artificial sem comprometer a confiabilidade do histórico médico.
+* A triagem **não substitui a avaliação veterinária**: é uma ferramenta de priorização, não de diagnóstico.
+* A camada de LLM é opcional; sem provedor configurado, a extração usa o fallback por palavras-chave, que cobre um conjunto menor de relatos.
+* A precisão do motor de regras depende da completude do histórico do pet no Oracle.
