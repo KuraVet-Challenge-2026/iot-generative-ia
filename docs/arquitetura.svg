@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 0 1280 860" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f766e"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="860" fill="#ffffff"/>
+
+  <!-- Título -->
+  <text x="40" y="52" font-size="30" font-weight="700" fill="#0f172a">KuraVet — Arquitetura da Triagem por IA</text>
+  <text x="40" y="84" font-size="17" fill="#475569">A LLM apenas interpreta o relato; o motor de regras determinístico decide a urgência.</text>
+
+  <!-- ===== Personas ===== -->
+  <!-- Tutor -->
+  <circle cx="92" cy="150" r="22" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <circle cx="92" cy="143" r="7" fill="#1d4ed8"/>
+  <path d="M78,163 a14,12 0 0 1 28,0 z" fill="#1d4ed8"/>
+  <text x="128" y="148" font-size="18" font-weight="700" fill="#0f172a">Tutor</text>
+  <text x="128" y="169" font-size="13" fill="#475569">relata sintomas</text>
+
+  <!-- Veterinário (junto ao portal) -->
+  <circle cx="1150" cy="418" r="22" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+  <circle cx="1150" cy="411" r="7" fill="#0f766e"/>
+  <path d="M1136,431 a14,12 0 0 1 28,0 z" fill="#0f766e"/>
+  <text x="1120" y="414" font-size="17" font-weight="700" fill="#0f172a" text-anchor="end">Veterinário</text>
+  <text x="1120" y="434" font-size="13" fill="#475569" text-anchor="end">prioriza a fila</text>
+
+  <!-- ===== A. App do Tutor ===== -->
+  <rect x="50" y="210" width="220" height="104" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="160" y="252" font-size="19" font-weight="700" fill="#0f172a" text-anchor="middle">App do Tutor</text>
+  <text x="160" y="277" font-size="14" fill="#475569" text-anchor="middle">React Native (Expo)</text>
+  <text x="160" y="297" font-size="13" fill="#475569" text-anchor="middle">cadastro · triagem · teleconsulta</text>
+
+  <!-- ===== B. API Java ===== -->
+  <rect x="530" y="210" width="230" height="104" rx="12" fill="#f8fafc" stroke="#0f172a" stroke-width="1.8"/>
+  <text x="645" y="250" font-size="19" font-weight="700" fill="#0f172a" text-anchor="middle">API Java</text>
+  <text x="645" y="275" font-size="14" fill="#475569" text-anchor="middle">Spring Boot · HTTP Basic</text>
+  <text x="645" y="295" font-size="13" fill="#475569" text-anchor="middle">regras de negócio</text>
+
+  <!-- ===== C. Componente de IA ===== -->
+  <rect x="890" y="170" width="350" height="190" rx="14" fill="#f0fdfa" stroke="#0f766e" stroke-width="2"/>
+  <text x="1065" y="200" font-size="18" font-weight="700" fill="#0f766e" text-anchor="middle">Componente de IA</text>
+  <!-- C1 extrator -->
+  <rect x="912" y="214" width="306" height="62" rx="9" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="1065" y="238" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Extrator de Sintomas (NLP)</text>
+  <text x="1065" y="259" font-size="12.5" fill="#475569" text-anchor="middle">LLM → fallback por palavras-chave</text>
+  <!-- C2 motor -->
+  <rect x="912" y="286" width="306" height="62" rx="9" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="1065" y="310" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Motor de Regras (determinístico)</text>
+  <text x="1065" y="331" font-size="12.5" fill="#475569" text-anchor="middle">decide a urgência: BAIXA → EMERGÊNCIA</text>
+
+  <!-- ===== D. Oracle ===== -->
+  <g>
+    <ellipse cx="645" cy="470" rx="95" ry="20" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/>
+    <path d="M550,470 v96 a95,20 0 0 0 190,0 v-96" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+    <ellipse cx="645" cy="470" rx="95" ry="20" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/>
+    <text x="645" y="512" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Oracle</text>
+    <text x="645" y="534" font-size="12.5" fill="#475569" text-anchor="middle">histórico clínico</text>
+    <text x="645" y="552" font-size="12.5" fill="#475569" text-anchor="middle">TRIAGEM (migration V7)</text>
+  </g>
+
+  <!-- ===== E. Portal ===== -->
+  <rect x="900" y="470" width="300" height="100" rx="12" fill="#f0fdfa" stroke="#0f766e" stroke-width="1.5"/>
+  <text x="1050" y="508" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Portal da Clínica</text>
+  <text x="1050" y="532" font-size="13.5" fill="#475569" text-anchor="middle">/portal (Thymeleaf)</text>
+  <text x="1050" y="551" font-size="13.5" fill="#475569" text-anchor="middle">fila de triagens por urgência</text>
+
+  <!-- ===== F. Resposta + Notificação ===== -->
+  <rect x="50" y="470" width="300" height="100" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="200" y="505" font-size="17" font-weight="700" fill="#0f172a" text-anchor="middle">Resposta ao Tutor</text>
+  <text x="200" y="528" font-size="13" fill="#475569" text-anchor="middle">urgência + recomendação</text>
+  <text x="200" y="547" font-size="13" fill="#475569" text-anchor="middle">notificação se ALTA / EMERGÊNCIA</text>
+
+  <!-- ===== SETAS numeradas ===== -->
+  <!-- 1: Tutor -> App -->
+  <line x1="92" y1="176" x2="110" y2="206" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="74" cy="196" r="13" fill="#1d4ed8"/><text x="74" y="201" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+
+  <!-- 2: App -> API -->
+  <line x1="270" y1="250" x2="526" y2="250" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="398" cy="250" r="13" fill="#0f766e"/><text x="398" y="255" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+  <text x="398" y="236" font-size="12.5" fill="#475569" text-anchor="middle">envia relato</text>
+
+  <!-- 3: API -> Oracle (lê histórico) -->
+  <line x1="628" y1="314" x2="612" y2="452" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="600" cy="384" r="13" fill="#0f766e"/><text x="600" y="389" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+  <text x="520" y="384" font-size="12.5" fill="#475569" text-anchor="middle">lê histórico</text>
+
+  <!-- 4: API -> IA -->
+  <line x1="762" y1="246" x2="886" y2="246" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <circle cx="824" cy="230" r="13" fill="#0f766e"/><text x="824" y="235" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+  <text x="824" y="216" font-size="12.5" fill="#475569" text-anchor="middle">relato + histórico</text>
+
+  <!-- 5: IA -> API (retorno) -->
+  <path d="M886,290 C 820,300 820,300 762,290" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <circle cx="824" cy="300" r="13" fill="#b45309"/><text x="824" y="305" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+  <text x="824" y="322" font-size="12.5" fill="#475569" text-anchor="middle">urgência + recomendação</text>
+
+  <!-- 6a: API -> F (resposta/notif) -->
+  <path d="M530,290 C 360,330 300,390 240,466" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="352" cy="372" r="13" fill="#1d4ed8"/><text x="352" y="377" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+  <text x="300" y="356" font-size="12.5" fill="#475569" text-anchor="middle">resposta + notificação</text>
+
+  <!-- 6b: API -> Oracle (grava TRIAGEM) -->
+  <line x1="662" y1="314" x2="678" y2="452" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="702" cy="384" r="13" fill="#1d4ed8"/><text x="702" y="389" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+  <text x="772" y="392" font-size="12.5" fill="#475569" text-anchor="middle">grava TRIAGEM</text>
+
+  <!-- 6c: API -> Portal (fila) -->
+  <path d="M760,300 C 880,360 960,410 1010,466" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="928" cy="388" r="13" fill="#1d4ed8"/><text x="928" y="393" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">6</text>
+  <text x="986" y="372" font-size="12.5" fill="#475569" text-anchor="middle">atualiza fila</text>
+
+  <!-- F -> Tutor (devolve) -->
+  <path d="M120,470 C 100,410 95,300 92,176" fill="none" stroke="#1d4ed8" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+
+  <!-- Portal -> Vet (curto) -->
+  <line x1="1120" y1="470" x2="1142" y2="444" stroke="#0f766e" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+
+  <!-- Legenda -->
+  <rect x="50" y="640" width="1190" height="150" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="70" y="672" font-size="15" font-weight="700" fill="#0f172a">Fluxo</text>
+  <text x="70" y="700" font-size="13.5" fill="#334155">1 · Tutor descreve o sintoma no app    2 · App envia o relato à API Java    3 · API lê o histórico do pet no Oracle</text>
+  <text x="70" y="724" font-size="13.5" fill="#334155">4 · API envia relato + histórico ao componente de IA    5 · Extrator estrutura os sintomas e o motor de regras devolve a urgência + recomendação</text>
+  <text x="70" y="748" font-size="13.5" fill="#334155">6 · API grava a TRIAGEM no Oracle, responde ao app (com notificação se ALTA/EMERGÊNCIA) e atualiza a fila no portal da clínica</text>
+  <text x="70" y="776" font-size="12.5" fill="#64748b">Decisão clínica 100% determinística (motor de regras) · IA generativa confinada à interpretação do texto, com fallback por palavras-chave.</text>
+</svg>
