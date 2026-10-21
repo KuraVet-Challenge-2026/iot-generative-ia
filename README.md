@@ -8,7 +8,7 @@
 
 ## 🔗 Links Oficiais
 
-* **Vídeo Pitch da Solução:** https://youtu.be/94Ev2tcrBWs
+* **Vídeo Pitch da Solução:** 
 * **Repositório GitHub:** https://github.com/KuraVet-Challenge-2026/iot-generative-ia
 
 ---
@@ -50,9 +50,9 @@ Adotamos uma **abordagem híbrida** que combina um **motor de regras determinís
 5. O **extrator de sintomas** (LLM ou fallback por palavras-chave) estrutura o relato; o **motor de regras** avalia o risco e devolve a classificação de urgência e a diretriz clínica.
 6. A API grava a triagem no Oracle e, em paralelo, retorna o resultado ao app e atualiza a **fila de triagem no portal da clínica** (`/portal`). Casos `ALTA`/`EMERGENCIA` geram notificação no app.
 
-### Diagrama de Sequência
+### Diagrama de Arquitetura
 
-<a href="https://ibb.co/hF40crD2"><img src="https://i.ibb.co/d4VZtXGk/Untitled-diagram-2026-08-26-224028.png" alt="Diagrama de sequência da triagem KuraVet" border="0"></a>
+![Arquitetura da triagem por IA do KuraVet: App do Tutor → API Java → Oracle → Componente de IA (extrator + motor de regras) → resposta ao app e fila no portal da clínica](docs/arquitetura.png)
 
 ## 5. Onde está o código
 
