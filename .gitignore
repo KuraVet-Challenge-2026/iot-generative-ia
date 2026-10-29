@@ -1,0 +1,19 @@
+# Credenciais e configuracao local: nunca versionar
+.env
+.env.*
+*.env
+!.env.example
+*.local.ps1
+*.local.json
+secrets/
+credentials*.json
+*.pem
+*.key
+*.pfx
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
