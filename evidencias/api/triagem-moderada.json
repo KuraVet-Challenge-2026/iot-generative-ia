@@ -1,0 +1,18 @@
+{
+    "idTriagem":  8,
+    "idPet":  5,
+    "nomePet":  "Nina",
+    "urgencia":  "MODERADA",
+    "recomendacao":  "Agende uma teleconsulta nas próximas 48 horas e observe a evolução. Esta triagem é orientativa e não substitui a avaliação do veterinário.",
+    "sintomas":  [
+                     "Tosse"
+                 ],
+    "regrasAplicadas":  [
+                            "R7 - sintoma que exige acompanhamento veterinário"
+                        ],
+    "metodoExtracao":  "LLM",
+    "dataTriagem":  "2026-11-03T17:10:06.679312",
+    "sugereTeleconsultaPrioritaria":  false,
+    "orientacao":  "Notamos que a tosse da Nina é um sintoma que já apareceu recentemente. Agende uma teleconsulta nas próximas 48 horas e observe a evolução. Esta triagem é orientativa e não substitui a avaliação do veterinário. Esta orientação não substitui a avaliação do veterinário.",
+    "origemOrientacao":  "IA_GENERATIVA"
+}

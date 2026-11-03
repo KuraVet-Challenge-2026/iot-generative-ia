@@ -1,0 +1,18 @@
+{
+    "idTriagem":  7,
+    "idPet":  5,
+    "nomePet":  "Nina",
+    "urgencia":  "BAIXA",
+    "recomendacao":  "Observe por 48 horas; se surgirem novos sintomas, refaça a triagem. Esta triagem é orientativa e não substitui a avaliação do veterinário.",
+    "sintomas":  [
+                     "Espirros"
+                 ],
+    "regrasAplicadas":  [
+                            "R8 - coceira ou espirros"
+                        ],
+    "metodoExtracao":  "LLM",
+    "dataTriagem":  "2026-11-03T17:10:02.5546156",
+    "sugereTeleconsultaPrioritaria":  false,
+    "orientacao":  "Notei que a Nina já apresentou espirros recentemente, além de outros episódios passados. Observe a Nina por 48 horas e, se surgirem novos sintomas, refaça a triagem. Esta triagem é orientativa e não substitui a avaliação do veterinário. Esta orientação não substitui a avaliação do veterinário.",
+    "origemOrientacao":  "IA_GENERATIVA"
+}

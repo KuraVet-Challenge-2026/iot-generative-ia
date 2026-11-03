@@ -1,0 +1,19 @@
+{
+    "idTriagem":  9,
+    "idPet":  5,
+    "nomePet":  "Nina",
+    "urgencia":  "EMERGENCIA",
+    "recomendacao":  "Procure atendimento presencial imediato em um pronto-socorro veterinário. Esta triagem é orientativa e não substitui a avaliação do veterinário.",
+    "sintomas":  [
+                     "Convulsão",
+                     "Desmaio"
+                 ],
+    "regrasAplicadas":  [
+                            "R1 - sinal de emergência (dificuldade para respirar, convulsão, sangramento, ingestão tóxica ou desmaio)"
+                        ],
+    "metodoExtracao":  "LLM",
+    "dataTriagem":  "2026-11-03T17:10:08.5149955",
+    "sugereTeleconsultaPrioritaria":  true,
+    "orientacao":  "A Nina teve novos episódios graves de convulsão e desmaio hoje, repetindo o quadro de emergência anterior. Procure atendimento presencial imediato em um pronto-socorro veterinário. Esta triagem é orientativa e não substitui a avaliação do veterinário. Esta orientação não substitui a avaliação do veterinário.",
+    "origemOrientacao":  "IA_GENERATIVA"
+}
